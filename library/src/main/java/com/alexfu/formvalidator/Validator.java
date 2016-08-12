@@ -5,6 +5,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.alexfu.formvalidator.rules.ValidationRule;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

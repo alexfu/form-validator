@@ -1,5 +1,6 @@
 package com.alexfu.formvalidator
 
+import com.alexfu.formvalidator.rules.EmailRule
 import org.jetbrains.spek.api.Spek
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

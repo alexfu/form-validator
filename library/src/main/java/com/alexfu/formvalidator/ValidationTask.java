@@ -2,6 +2,8 @@ package com.alexfu.formvalidator;
 
 import android.widget.EditText;
 
+import com.alexfu.formvalidator.rules.ValidationRule;
+
 import java.util.ArrayList;
 import java.util.List;
 

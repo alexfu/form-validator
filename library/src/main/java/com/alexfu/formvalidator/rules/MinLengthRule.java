@@ -1,4 +1,4 @@
-package com.alexfu.formvalidator;
+package com.alexfu.formvalidator.rules;
 
 public class MinLengthRule implements ValidationRule {
   public final int length;

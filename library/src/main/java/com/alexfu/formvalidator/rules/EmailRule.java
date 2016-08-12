@@ -1,4 +1,4 @@
-package com.alexfu.formvalidator;
+package com.alexfu.formvalidator.rules;
 
 
 import com.alexfu.formvalidator.utils.Patterns;
