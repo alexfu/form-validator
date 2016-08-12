@@ -87,7 +87,7 @@ public class Validator implements ValidationAsyncTask.Callback {
 
   private void validate(EditText editText) {
     ValidationTask task = new ValidationTask(editText, ruleMap.get(editText));
-    new ValidationAsyncTask(ValidationAsyncTask.Mode.FORM, this).execute(task);
+    new ValidationAsyncTask(ValidationAsyncTask.Mode.INPUT, this).execute(task);
   }
 
   @Override
