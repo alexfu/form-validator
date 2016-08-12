@@ -26,3 +26,17 @@ validator.validate();
 ```
 
 Adding rules will also bind a `TextWatcher` to the given `EditText` and validate it on the fly.
+
+# Installation
+
+```
+buildscript {
+  repositories {
+    maven { url 'https://jitpack.io' }
+  }
+}
+
+dependencies {
+  compile 'com.github.alexfu:form-validator:0.1'
+}
+```
