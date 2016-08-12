@@ -3,20 +3,8 @@ package com.alexfu.formvalidator.rules;
 
 import com.alexfu.formvalidator.utils.Patterns;
 
-public class EmailRule implements ValidationRule {
-  private final String errorMessage;
-
+public class EmailRule extends RegexRule {
   public EmailRule(String errorMessage) {
-    this.errorMessage = errorMessage;
-  }
-
-  @Override
-  public String errorMessage() {
-    return errorMessage;
-  }
-
-  @Override
-  public boolean isValid(String input) {
-    return Patterns.EMAIL_ADDRESS.matcher(input).matches();
+    super(Patterns.EMAIL_ADDRESS, errorMessage);
   }
 }
