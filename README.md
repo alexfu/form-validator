@@ -30,7 +30,7 @@ Adding rules will also bind a `TextWatcher` to the given `EditText` and validate
 # Installation
 
 ```
-buildscript {
+allprojects {
   repositories {
     maven { url 'https://jitpack.io' }
   }
