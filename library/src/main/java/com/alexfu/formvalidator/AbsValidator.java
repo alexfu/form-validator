@@ -1,8 +1,6 @@
 package com.alexfu.formvalidator;
 
 import android.support.v4.util.ArrayMap;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.TextView;
 
 import com.alexfu.formvalidator.rules.ValidationRule;
@@ -13,36 +11,9 @@ import java.util.List;
 
 public abstract class AbsValidator<T> {
   private ArrayMap<TextView, List<ValidationRule>> ruleMap;
-  private ArrayMap<TextWatcher, TextView> textWatchers;
 
   protected AbsValidator() {
     ruleMap = new ArrayMap<>();
-    textWatchers = new ArrayMap<>();
-  }
-
-  protected void watchForTextChange(TextView view) {
-    if (!textWatchers.containsValue(view)) {
-      TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-          // No op
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-          // No op
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-          TextView editText = textWatchers.get(this);
-          validate(editText);
-        }
-      };
-
-      view.addTextChangedListener(watcher);
-      textWatchers.put(watcher, view);
-    }
   }
 
   public void addRule(TextView view, List<ValidationRule> rules) {
@@ -51,7 +22,6 @@ public abstract class AbsValidator<T> {
     }
 
     ruleMap.get(view).addAll(rules);
-     watchForTextChange(view);
   }
 
   public void addRule(TextView view, ValidationRule...rules) {
@@ -60,7 +30,6 @@ public abstract class AbsValidator<T> {
     }
 
     ruleMap.get(view).addAll(Arrays.asList(rules));
-     watchForTextChange(view);
   }
 
   public T validate() {
