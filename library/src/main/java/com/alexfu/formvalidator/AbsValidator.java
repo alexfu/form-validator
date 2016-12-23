@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.alexfu.formvalidator.rules.ValidationRule;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbsValidator<T> {
@@ -29,7 +28,9 @@ public abstract class AbsValidator<T> {
       ruleMap.put(view, new ArrayList<ValidationRule>());
     }
 
-    ruleMap.get(view).addAll(Arrays.asList(rules));
+    for (int i = 0; i < rules.length; i++) {
+      ruleMap.get(view).add(rules[i]);
+    }
   }
 
   public T validate() {

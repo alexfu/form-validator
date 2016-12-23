@@ -25,7 +25,8 @@ public class DefaultValidationWorker implements ValidationWorker<Void>, Validati
   public void onTaskCompleted(ValidationAsyncTask.Mode mode, List<ValidationResult> results) {
     int invalidHitCount = 0;
 
-    for(ValidationResult result : results) {
+    for (int i = 0; i < results.size(); i++) {
+      ValidationResult result = results.get(i);
       if (result.isValid()) {
         callback.onFieldValidationSuccessful(result.view);
       } else {
