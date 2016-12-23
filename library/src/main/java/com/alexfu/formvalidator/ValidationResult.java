@@ -1,14 +1,14 @@
 package com.alexfu.formvalidator;
 
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class ValidationResult {
-  public final EditText view;
+  public final TextView view;
   public final List<String> errors;
 
-  public ValidationResult(EditText view, List<String> errors) {
+  public ValidationResult(TextView view, List<String> errors) {
     this.view = view;
     this.errors = errors;
   }

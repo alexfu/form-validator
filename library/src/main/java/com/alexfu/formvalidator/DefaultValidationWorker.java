@@ -1,10 +1,10 @@
 package com.alexfu.formvalidator;
 
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
-public class DefaultValidationWorker implements ValidationWorker<Void>,ValidationAsyncTask.Callback {
+public class DefaultValidationWorker implements ValidationWorker<Void>, ValidationAsyncTask.Callback {
   private final Callback callback;
 
   public DefaultValidationWorker(Callback callback) {
@@ -44,8 +44,8 @@ public class DefaultValidationWorker implements ValidationWorker<Void>,Validatio
   }
 
   public interface Callback {
-    void onFieldValidationSuccessful(EditText editText);
-    void onFieldValidationFailed(EditText editText, List<String> errors);
+    void onFieldValidationSuccessful(TextView view);
+    void onFieldValidationFailed(TextView view, List<String> errors);
     void onFormValidationSuccessful();
     void onFormValidationFailed(List<ValidationResult> errorValidations);
   }

@@ -3,6 +3,7 @@ package com.alexfu.formvalidatordemo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.alexfu.formvalidator.DefaultValidationWorker;
 import com.alexfu.formvalidator.ValidationResult;
@@ -25,13 +26,13 @@ public class MainActivity extends AppCompatActivity implements DefaultValidation
   }
 
   @Override
-  public void onFieldValidationSuccessful(EditText editText) {
-    editText.setError(null);
+  public void onFieldValidationSuccessful(TextView view) {
+    view.setError(null);
   }
 
   @Override
-  public void onFieldValidationFailed(EditText editText, List<String> errors) {
-    editText.setError(errors.get(0)); // Show errors one at a time
+  public void onFieldValidationFailed(TextView view, List<String> errors) {
+    view.setError(errors.get(0)); // Show errors one at a time
   }
 
   @Override
