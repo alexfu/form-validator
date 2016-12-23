@@ -11,11 +11,11 @@ public class Validator extends AbsValidator<Void> {
     this.worker = new DefaultValidationWorker(callback);
   }
 
-  @Override Void performValidate(ValidationTask[] tasks) {
+  @Override protected Void performValidate(ValidationTask[] tasks) {
     return worker.performValidate(tasks);
   }
 
-  @Override Void performValidate(ValidationTask task) {
+  @Override protected Void performValidate(ValidationTask task) {
     return worker.performValidate(task);
   }
 }

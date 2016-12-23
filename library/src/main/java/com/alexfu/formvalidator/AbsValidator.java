@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AbsValidator<T> {
+public abstract class AbsValidator<T> {
   private ArrayMap<EditText, List<ValidationRule>> ruleMap;
   private ArrayMap<TextWatcher, EditText> textWatchers;
 
-  public AbsValidator() {
+  protected AbsValidator() {
     ruleMap = new ArrayMap<>();
     textWatchers = new ArrayMap<>();
   }
@@ -78,6 +78,6 @@ abstract class AbsValidator<T> {
     return performValidate(task);
   }
 
-  abstract T performValidate(ValidationTask[] tasks);
-  abstract T performValidate(ValidationTask task);
+  protected abstract T performValidate(ValidationTask[] tasks);
+  protected abstract T performValidate(ValidationTask task);
 }
