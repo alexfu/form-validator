@@ -7,7 +7,7 @@ import com.alexfu.formvalidator.rules.ValidationRule;
 import java.util.ArrayList;
 import java.util.List;
 
-class ValidationTask {
+public class ValidationTask {
   private final List<ValidationRule> rules;
   private final EditText editText;
 

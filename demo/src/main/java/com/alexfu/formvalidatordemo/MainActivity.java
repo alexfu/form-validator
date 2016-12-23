@@ -1,16 +1,17 @@
 package com.alexfu.formvalidatordemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
+import com.alexfu.formvalidator.DefaultValidationWorker;
 import com.alexfu.formvalidator.ValidationResult;
 import com.alexfu.formvalidator.Validator;
 import com.alexfu.formvalidator.rules.EmailRule;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Validator.Callback {
+public class MainActivity extends AppCompatActivity implements DefaultValidationWorker.Callback {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +20,7 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
 
     EditText emailInput = (EditText) findViewById(R.id.email_input);
 
-    Validator validator = new Validator();
-    validator.setCallback(this);
+    Validator validator = new Validator(this);
     validator.addRule(emailInput, new EmailRule("Invalid email."));
   }
 
