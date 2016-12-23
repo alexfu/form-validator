@@ -38,7 +38,7 @@ public class DefaultValidationWorker implements ValidationWorker<Void>, Validati
       if (invalidHitCount == 0) {
         callback.onFormValidationSuccessful();
       } else {
-        callback.onFormValidationFailed(results);
+        callback.onFormValidationFailed();
       }
     }
   }
@@ -47,6 +47,6 @@ public class DefaultValidationWorker implements ValidationWorker<Void>, Validati
     void onFieldValidationSuccessful(TextView view);
     void onFieldValidationFailed(TextView view, List<String> errors);
     void onFormValidationSuccessful();
-    void onFormValidationFailed(List<ValidationResult> errorValidations);
+    void onFormValidationFailed();
   }
 }
