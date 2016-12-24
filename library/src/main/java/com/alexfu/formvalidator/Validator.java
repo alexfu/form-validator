@@ -1,5 +1,7 @@
 package com.alexfu.formvalidator;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.TextView;
 
 import com.alexfu.formvalidator.rules.ValidationRule;
@@ -19,10 +21,12 @@ public class Validator extends AbsValidator<Void> implements ValidationAsyncTask
 
   @Override public void addRule(TextView view, List<ValidationRule> rules) {
     super.addRule(view, rules);
+    watchForTextChanges(view);
   }
 
   @Override public void addRule(TextView view, ValidationRule... rules) {
     super.addRule(view, rules);
+    watchForTextChanges(view);
   }
 
   @Override public Void performValidate(ValidationTask[] tasks) {
@@ -56,6 +60,26 @@ public class Validator extends AbsValidator<Void> implements ValidationAsyncTask
         callback.onFormValidationFailed();
       }
     }
+  }
+
+  private void watchForTextChanges(final TextView view) {
+    TextWatcher watcher = new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        // Ignore
+      }
+
+      @Override
+      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        // Ignore
+      }
+
+      @Override public void afterTextChanged(Editable editable) {
+        validate(view);
+      }
+    };
+
+    view.addTextChangedListener(watcher);
   }
 
   public interface Callback {
