@@ -1,23 +1,23 @@
 package com.alexfu.formvalidator;
 
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.alexfu.formvalidator.rules.ValidationRule;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class ValidationTask {
+public class ValidationTask {
   private final List<ValidationRule> rules;
-  private final EditText editText;
+  private final TextView view;
 
-  ValidationTask(EditText editText, List<ValidationRule> rules) {
+  ValidationTask(TextView view, List<ValidationRule> rules) {
     this.rules = rules;
-    this.editText = editText;
+    this.view = view;
   }
 
   public ValidationResult validate() {
-    String input = editText.getText().toString();
+    String input = view.getText().toString();
     List<String> errorMessages = new ArrayList<>();
 
     for(ValidationRule rule : rules) {
@@ -26,6 +26,6 @@ class ValidationTask {
       }
     }
 
-    return new ValidationResult(editText, errorMessages);
+    return new ValidationResult(view, errorMessages);
   }
 }

@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationAsyncTask extends AsyncTask<ValidationTask, Integer, List<ValidationResult>> {
+class ValidationAsyncTask extends AsyncTask<ValidationTask, Integer, List<ValidationResult>> {
 
   enum Mode {
     INPUT, FORM
