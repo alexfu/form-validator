@@ -10,14 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alexfu.formvalidator.DefaultValidationWorker;
 import com.alexfu.formvalidator.Validator;
 import com.alexfu.formvalidator.rules.EmailRule;
 import com.alexfu.formvalidator.rules.MinLengthRule;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DefaultValidationWorker.Callback {
+public class MainActivity extends AppCompatActivity implements Validator.Callback {
   private Button validateButton;
   private EditText firstNameInput, lastNameInput, emailInput;
   private Validator validator = new Validator(this);
