@@ -1,4 +1,4 @@
-# FormValidator
+# form-validator
 
 A simple, easy to use, no frills, form validator for Android.
 
