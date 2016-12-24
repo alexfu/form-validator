@@ -5,17 +5,17 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.alexfu'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.1"
+  compileSdkVersion 25
+  buildToolsVersion "24.0.2"
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 24
+    targetSdkVersion 25
   }
 }
 
 dependencies {
-  compile 'com.android.support:support-v4:24.1.1'
+  compile 'com.android.support:support-v4:25.0.1'
   testCompile 'junit:junit:4.12'
   testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   testCompile "org.jetbrains.spek:spek:$spek_version"
