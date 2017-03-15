@@ -14,7 +14,7 @@ import java.util.List;
  * Default validator
  */
 
-public class Validator implements ValidationAsyncTask.Callback {
+public class Validator {
     private final ArrayMap<TextView, List<ValidationRule>> ruleMap = new ArrayMap<>();
     private final Callback callback;
 
@@ -43,48 +43,32 @@ public class Validator implements ValidationAsyncTask.Callback {
     }
 
     public void validate() {
-        ValidationTask[] tasks = new ValidationTask[ruleMap.size()];
-        for (int i = 0; i < tasks.length; i++) {
+        int invalidHitCount = 0;
+        for (int i = 0; i < ruleMap.size(); i++) {
             TextView view = ruleMap.keyAt(i);
             List<ValidationRule> rules = ruleMap.get(view);
-            tasks[i] = new ValidationTask(view, rules);
+            ValidationResult result = new ValidationTask(view, rules).validate();
+            if (result.isValid()) {
+                callback.onFieldValidationSuccessful(view);
+            } else {
+                invalidHitCount++;
+                callback.onFieldValidationFailed(view, result.errors);
+            }
         }
-        performValidate(tasks);
+        if (invalidHitCount == 0) {
+            callback.onFormValidationSuccessful();
+        } else {
+            callback.onFormValidationFailed();
+        }
     }
 
     public void validate(TextView view) {
         ValidationTask task = new ValidationTask(view, ruleMap.get(view));
-        performValidate(task);
-    }
-
-    public void performValidate(ValidationTask[] tasks) {
-        new ValidationAsyncTask(ValidationAsyncTask.Mode.FORM, this).execute(tasks);
-    }
-
-    public void performValidate(ValidationTask task) {
-        new ValidationAsyncTask(ValidationAsyncTask.Mode.INPUT, this).execute(task);
-    }
-
-    @Override
-    public void onTaskCompleted(ValidationAsyncTask.Mode mode, List<ValidationResult> results) {
-        int invalidHitCount = 0;
-
-        for (int i = 0; i < results.size(); i++) {
-            ValidationResult result = results.get(i);
-            if (result.isValid()) {
-                callback.onFieldValidationSuccessful(result.view);
-            } else {
-                invalidHitCount++;
-                callback.onFieldValidationFailed(result.view, result.errors);
-            }
-        }
-
-        if (mode == ValidationAsyncTask.Mode.FORM) {
-            if (invalidHitCount == 0) {
-                callback.onFormValidationSuccessful();
-            } else {
-                callback.onFormValidationFailed();
-            }
+        ValidationResult result = task.validate();
+        if (result.isValid()) {
+            callback.onFieldValidationSuccessful(view);
+        } else {
+            callback.onFieldValidationFailed(view, result.errors);
         }
     }
 
