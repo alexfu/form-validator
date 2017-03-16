@@ -7,7 +7,8 @@ A simple, easy to use, no frills, form validator for Android.
 ```java
 EmailRule emailRule = new EmailRule("Invalid email address.");
 
-Validator validator = new Validator(this);
+Validator validator = new Validator();
+validate.setCallback(this);
 validator.addRule(myEditText, emailRule); // Add rules to your EditText
 validator.validate();
 ```
@@ -18,7 +19,8 @@ If you want to have multiple rules...
 EmailRule emailRule = new EmailRule("Invalid email address.");
 MinLengthRule minLengthRule = new MinLengthRule(5, "Must be at least 5 characters long.")
 
-Validator validator = new Validator(this);
+Validator validator = new Validator();
+validate.setCallback(this);
 validator.addRule(myEditText, emailRule, minLengthRule); // Add rules to your EditText
 validator.validate();
 ```
@@ -35,6 +37,6 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.alexfu:form-validator:0.1'
+  compile 'com.github.alexfu:form-validator:1.0'
 }
 ```
