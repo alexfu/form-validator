@@ -40,3 +40,7 @@ dependencies {
   compile 'com.github.alexfu:form-validator:1.0'
 }
 ```
+
+# Rx
+
+Fancy an Rx API? Take a look at [form-validator-rx](https://github.com/alexfu/form-validator-rx).
