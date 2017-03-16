@@ -48,6 +48,8 @@ public class Validator {
             return;
         }
 
+        callback.onBeginFormValidation();
+
         for (int i = 0; i < ruleMap.size(); i++) {
             TextView view = ruleMap.keyAt(i);
             validate(view);
@@ -87,6 +89,7 @@ public class Validator {
 
     public interface Callback {
         void onFieldValidated(ValidationResult result);
+        void onBeginFormValidation();
         void onFormValidated();
     }
 }

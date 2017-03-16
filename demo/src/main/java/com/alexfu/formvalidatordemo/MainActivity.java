@@ -39,10 +39,13 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
 
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
-                validationErrors.clear();
                 validator.validate();
             }
         });
+    }
+
+    @Override public void onBeginFormValidation() {
+        validationErrors.clear();
     }
 
     @Override public void onFieldValidated(ValidationResult result) {
