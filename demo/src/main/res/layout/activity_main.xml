@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  tools:context="com.alexfu.formvalidatordemo.MainActivity">
-
-  <EditText
-    android:id="@+id/first_name_input"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="First Name"
-    android:singleLine="true"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.alexfu.formvalidatordemo.MainActivity">
 
-  <EditText
-    android:id="@+id/last_name_input"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="First Name"
-    android:singleLine="true"/>
+    <EditText
+        android:id="@+id/first_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:singleLine="true"/>
 
-  <EditText
-    android:id="@+id/email_input"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:inputType="textEmailAddress"
-    android:hint="Email"
-    android:singleLine="true"/>
+    <EditText
+        android:id="@+id/last_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:singleLine="true"/>
 
-  <Button
-    android:id="@+id/button_validate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Validate"/>
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:singleLine="true"/>
+
+    <Button
+        android:id="@+id/button_validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validate"/>
 
 </LinearLayout>

@@ -4,28 +4,27 @@ import android.widget.TextView;
 
 import com.alexfu.formvalidator.rules.ValidationRule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationTask {
-  private final List<ValidationRule> rules;
-  private final TextView view;
+    private final List<ValidationRule> rules;
+    private final TextView view;
 
-  ValidationTask(TextView view, List<ValidationRule> rules) {
-    this.rules = rules;
-    this.view = view;
-  }
-
-  public ValidationResult validate() {
-    String input = view.getText().toString();
-    List<String> errorMessages = new ArrayList<>();
-
-    for(ValidationRule rule : rules) {
-      if (!rule.isValid(input)) {
-        errorMessages.add(rule.errorMessage());
-      }
+    ValidationTask(TextView view, List<ValidationRule> rules) {
+        this.rules = rules;
+        this.view = view;
     }
 
-    return new ValidationResult(view, errorMessages);
-  }
+    public ValidationResult validate() {
+        String input = view.getText().toString();
+        ValidationResult result = new ValidationResult(view);
+
+        for (ValidationRule rule : rules) {
+            if (!rule.isValid(input)) {
+                result.errors.add(rule.errorMessage());
+            }
+        }
+
+        return result;
+    }
 }
