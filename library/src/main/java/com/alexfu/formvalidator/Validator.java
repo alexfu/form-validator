@@ -1,5 +1,6 @@
 package com.alexfu.formvalidator;
 
+import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,9 +17,9 @@ import java.util.List;
 
 public class Validator {
     private final ArrayMap<TextView, List<ValidationRule>> ruleMap = new ArrayMap<>();
-    private final Callback callback;
+    @Nullable private Callback callback;
 
-    public Validator(Callback callback) {
+    public void setCallback(@Nullable Callback callback) {
         this.callback = callback;
     }
 
@@ -49,16 +50,24 @@ public class Validator {
             List<ValidationRule> rules = ruleMap.get(view);
             ValidationResult result = new ValidationTask(view, rules).validate();
             if (result.isValid()) {
-                callback.onFieldValidationSuccessful(view);
+                if (callback != null) {
+                    callback.onFieldValidationSuccessful(view);
+                }
             } else {
                 invalidHitCount++;
-                callback.onFieldValidationFailed(view, result.errors);
+                if (callback != null) {
+                    callback.onFieldValidationFailed(view, result.errors);
+                }
             }
         }
         if (invalidHitCount == 0) {
-            callback.onFormValidationSuccessful();
+            if (callback != null) {
+                callback.onFormValidationSuccessful();
+            }
         } else {
-            callback.onFormValidationFailed();
+            if (callback != null) {
+                callback.onFormValidationFailed();
+            }
         }
     }
 
@@ -66,9 +75,13 @@ public class Validator {
         ValidationTask task = new ValidationTask(view, ruleMap.get(view));
         ValidationResult result = task.validate();
         if (result.isValid()) {
-            callback.onFieldValidationSuccessful(view);
+            if (callback != null) {
+                callback.onFieldValidationSuccessful(view);
+            }
         } else {
-            callback.onFieldValidationFailed(view, result.errors);
+            if (callback != null) {
+                callback.onFieldValidationFailed(view, result.errors);
+            }
         }
     }
 
