@@ -10,16 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alexfu.formvalidator.ValidationResult;
 import com.alexfu.formvalidator.Validator;
 import com.alexfu.formvalidator.rules.EmailRule;
 import com.alexfu.formvalidator.rules.MinLengthRule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Validator.Callback {
     private Button validateButton;
     private EditText firstNameInput, lastNameInput, emailInput;
     private Validator validator = new Validator();
+    private List<ValidationResult> validationErrors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
     }
 
     private void setUpValidator() {
+        validator.setCallback(this);
         validator.addRule(firstNameInput, new MinLengthRule(1, "First name cannot be empty."));
         validator.addRule(lastNameInput, new MinLengthRule(1, "Last name cannot be empty."));
         validator.addRule(emailInput, new EmailRule("Invalid email."));
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
 
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
+                validationErrors.clear();
                 validator.validate();
             }
         });
@@ -47,22 +52,21 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
         validateOnTextChange(firstNameInput, lastNameInput, emailInput);
     }
 
-    @Override public void onFieldValidationSuccessful(TextView view) {
-        view.setError(null);
+    @Override public void onFieldValidated(ValidationResult result) {
+        if (result.isValid()) {
+            result.view.setError(null);
+        } else {
+            result.view.setError(result.errors.get(0));
+            validationErrors.add(result);
+        }
     }
 
-    @Override
-    public void onFieldValidationFailed(TextView view, List<String> errors) {
-        view.setError(errors.get(0));
-    }
-
-    @Override public void onFormValidationSuccessful() {
-        Toast.makeText(this, "Form is valid!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onFormValidationFailed() {
-        // Ignore
+    @Override public void onFormValidated() {
+        if (validationErrors.isEmpty()) {
+            Toast.makeText(this, "Form is valid!", Toast.LENGTH_SHORT).show();
+        } else {
+            validationErrors.get(0).view.requestFocus();
+        }
     }
 
     private void validateOnTextChange(TextView... inputs) {

@@ -44,45 +44,25 @@ public class Validator {
     }
 
     public void validate() {
-        int invalidHitCount = 0;
+        if (callback == null) {
+            return;
+        }
+
         for (int i = 0; i < ruleMap.size(); i++) {
             TextView view = ruleMap.keyAt(i);
-            List<ValidationRule> rules = ruleMap.get(view);
-            ValidationResult result = new ValidationTask(view, rules).validate();
-            if (result.isValid()) {
-                if (callback != null) {
-                    callback.onFieldValidationSuccessful(view);
-                }
-            } else {
-                invalidHitCount++;
-                if (callback != null) {
-                    callback.onFieldValidationFailed(view, result.errors);
-                }
-            }
+            validate(view);
         }
-        if (invalidHitCount == 0) {
-            if (callback != null) {
-                callback.onFormValidationSuccessful();
-            }
-        } else {
-            if (callback != null) {
-                callback.onFormValidationFailed();
-            }
-        }
+
+        callback.onFormValidated();
     }
 
     public void validate(TextView view) {
-        ValidationTask task = new ValidationTask(view, ruleMap.get(view));
-        ValidationResult result = task.validate();
-        if (result.isValid()) {
-            if (callback != null) {
-                callback.onFieldValidationSuccessful(view);
-            }
-        } else {
-            if (callback != null) {
-                callback.onFieldValidationFailed(view, result.errors);
-            }
+        if (callback == null) {
+            return;
         }
+
+        ValidationTask task = new ValidationTask(view, ruleMap.get(view));
+        callback.onFieldValidated(task.validate());
     }
 
     private void watchForTextChanges(final TextView view) {
@@ -106,9 +86,7 @@ public class Validator {
     }
 
     public interface Callback {
-        void onFieldValidationSuccessful(TextView view);
-        void onFieldValidationFailed(TextView view, List<String> errors);
-        void onFormValidationSuccessful();
-        void onFormValidationFailed();
+        void onFieldValidated(ValidationResult result);
+        void onFormValidated();
     }
 }
