@@ -1,5 +1,16 @@
 # Change Log
 
+## [1.0](https://github.com/alexfu/form-validator/tree/1.0) (2017-03-16)
+[Full Changelog](https://github.com/alexfu/form-validator/compare/0.2...1.0)
+
+**Closed issues:**
+
+- Rx [\#2](https://github.com/alexfu/form-validator/issues/2)
+
+**Merged pull requests:**
+
+- Implements V1 API [\#4](https://github.com/alexfu/form-validator/pull/4) ([alexfu](https://github.com/alexfu))
+
 ## [0.2](https://github.com/alexfu/form-validator/tree/0.2) (2016-12-24)
 [Full Changelog](https://github.com/alexfu/form-validator/compare/0.1...0.2)
 
