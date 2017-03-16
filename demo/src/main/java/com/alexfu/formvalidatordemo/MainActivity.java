@@ -2,12 +2,9 @@ package com.alexfu.formvalidatordemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexfu.formvalidator.ValidationResult;
@@ -46,10 +43,6 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
                 validator.validate();
             }
         });
-
-        // Input validation
-
-        validateOnTextChange(firstNameInput, lastNameInput, emailInput);
     }
 
     @Override public void onFieldValidated(ValidationResult result) {
@@ -66,26 +59,6 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
             Toast.makeText(this, "Form is valid!", Toast.LENGTH_SHORT).show();
         } else {
             validationErrors.get(0).view.requestFocus();
-        }
-    }
-
-    private void validateOnTextChange(TextView... inputs) {
-        for (final TextView input : inputs) {
-            input.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    // Ignore
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    // Ignore
-                }
-
-                @Override public void afterTextChanged(Editable s) {
-                    validator.validate(input);
-                }
-            });
         }
     }
 
