@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
     @Override public void onFormValidated() {
         if (validationErrors.isEmpty()) {
             Toast.makeText(this, "Form is valid!", Toast.LENGTH_SHORT).show();
-        } else {
-            validationErrors.get(0).view.requestFocus();
         }
     }
 
