@@ -43,6 +43,20 @@ public class Validator {
         watchForTextChanges(view);
     }
 
+    public void removeRule(TextView view, ValidationRule rule) {
+        if (!ruleMap.containsKey(view)) {
+            return;
+        }
+        ruleMap.get(view).remove(rule);
+    }
+
+    public void removeAllRules(TextView view) {
+        if (!ruleMap.containsKey(view)) {
+            return;
+        }
+        ruleMap.get(view).clear();
+    }
+
     public void validate() {
         if (callback == null) {
             return;
