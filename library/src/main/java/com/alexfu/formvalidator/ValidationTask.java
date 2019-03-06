@@ -6,7 +6,7 @@ import com.alexfu.formvalidator.rules.ValidationRule;
 
 import java.util.List;
 
-public class ValidationTask {
+class ValidationTask {
     private final List<ValidationRule> rules;
     private final TextView view;
 
@@ -15,7 +15,7 @@ public class ValidationTask {
         this.view = view;
     }
 
-    public ValidationResult validate() {
+    ValidationResult validate() {
         String input = view.getText().toString();
         ValidationResult result = new ValidationResult(view);
 

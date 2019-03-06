@@ -1,7 +1,9 @@
 package com.alexfu.formvalidatordemo;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
     private Button validateButton;
     private EditText firstNameInput, lastNameInput, emailInput;
     private Validator validator = new Validator();
-    private List<ValidationResult> validationErrors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,28 +46,27 @@ public class MainActivity extends AppCompatActivity implements Validator.Callbac
     }
 
     @Override public void onBeginFormValidation() {
-        validationErrors.clear();
+        Log.d("MainActivity", "onBeginFormValidation");
     }
 
-    @Override public void onFieldValidated(ValidationResult result) {
-        if (result.isValid()) {
-            result.view.setError(null);
-        } else {
-            result.view.setError(result.errors.get(0));
-            validationErrors.add(result);
-        }
+    @Override public void onFieldValidated(@NonNull ValidationResult result) {
+        Log.d("MainActivity", "onFieldValidated");
     }
 
-    @Override public void onFormValidated() {
-        if (validationErrors.isEmpty()) {
-            Toast.makeText(this, "Form is valid!", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onSuccessValidation() {
+        Log.d("MainActivity", "onSuccessValidation");
+    }
+
+    @Override
+    public void onFailedValidation(@NonNull List<ValidationResult> errors) {
+        Log.d("MainActivity", "onFailedValidation");
     }
 
     private void setUpViews() {
-        firstNameInput = (EditText) findViewById(R.id.first_name_input);
-        lastNameInput = (EditText) findViewById(R.id.last_name_input);
-        emailInput = (EditText) findViewById(R.id.email_input);
-        validateButton = (Button) findViewById(R.id.button_validate);
+        firstNameInput = findViewById(R.id.first_name_input);
+        lastNameInput = findViewById(R.id.last_name_input);
+        emailInput = findViewById(R.id.email_input);
+        validateButton = findViewById(R.id.button_validate);
     }
 }
