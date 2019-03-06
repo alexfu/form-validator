@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0](https://github.com/alexfu/form-validator/tree/2.0) (2019-03-06)
+[Full Changelog](https://github.com/alexfu/form-validator/compare/1.1.0...2.0)
+
+**Merged pull requests:**
+
+- Release 2.0 [\#8](https://github.com/alexfu/form-validator/pull/8) ([alexfu](https://github.com/alexfu))
+- Update to handle setting errors automatically [\#7](https://github.com/alexfu/form-validator/pull/7) ([alexfu](https://github.com/alexfu))
+- Update build tools and everything else [\#6](https://github.com/alexfu/form-validator/pull/6) ([alexfu](https://github.com/alexfu))
+
 ## [1.1.0](https://github.com/alexfu/form-validator/tree/1.1.0) (2017-04-26)
 [Full Changelog](https://github.com/alexfu/form-validator/compare/1.0...1.1.0)
 
