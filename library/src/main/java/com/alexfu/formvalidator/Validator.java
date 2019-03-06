@@ -1,5 +1,6 @@
 package com.alexfu.formvalidator;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.text.Editable;
@@ -18,6 +19,8 @@ import java.util.List;
 public class Validator {
     private final ArrayMap<TextView, List<ValidationRule>> ruleMap = new ArrayMap<>();
     @Nullable private Callback callback;
+    private boolean autoSetErrors = true;
+    private List<ValidationResult> errors = new ArrayList<>();
 
     public void setCallback(@Nullable Callback callback) {
         this.callback = callback;
@@ -57,28 +60,39 @@ public class Validator {
         ruleMap.get(view).clear();
     }
 
-    public void validate() {
-        if (callback == null) {
-            return;
-        }
+    public void setAutoSetErrors(boolean autoSetErrors) {
+        this.autoSetErrors = autoSetErrors;
+    }
 
-        callback.onBeginFormValidation();
+    public void validate() {
+        triggerOnBeginFormValidation();
+        errors.clear();
 
         for (int i = 0; i < ruleMap.size(); i++) {
             TextView view = ruleMap.keyAt(i);
             validate(view);
         }
 
-        callback.onFormValidated();
+        if (errors.isEmpty()) {
+            triggerOnSuccessValidation();
+        } else {
+            triggerOnFailedValidation(errors);
+        }
     }
 
-    public void validate(TextView view) {
-        if (callback == null) {
-            return;
+    private void validate(TextView view) {
+        ValidationTask task = new ValidationTask(view, ruleMap.get(view));
+        ValidationResult result = task.validate();
+        if (autoSetErrors) {
+            if (result.isValid()) {
+                TextViewHelper.setError(view, null);
+            } else {
+                TextViewHelper.setError(view, result.errors.get(0));
+                errors.add(result);
+            }
         }
 
-        ValidationTask task = new ValidationTask(view, ruleMap.get(view));
-        callback.onFieldValidated(task.validate());
+        triggerOnFieldValidated(result);
     }
 
     private void watchForTextChanges(final TextView view) {
@@ -101,9 +115,34 @@ public class Validator {
         view.addTextChangedListener(watcher);
     }
 
+    private void triggerOnFieldValidated(ValidationResult result) {
+        if (callback != null) {
+            callback.onFieldValidated(result);
+        }
+    }
+
+    private void triggerOnBeginFormValidation() {
+        if (callback != null) {
+            callback.onBeginFormValidation();
+        }
+    }
+
+    private void triggerOnSuccessValidation() {
+        if (callback != null) {
+            callback.onSuccessValidation();
+        }
+    }
+
+    private void triggerOnFailedValidation(List<ValidationResult> errors) {
+        if (callback != null) {
+            callback.onFailedValidation(errors);
+        }
+    }
+
     public interface Callback {
-        void onFieldValidated(ValidationResult result);
+        void onFieldValidated(@NonNull ValidationResult result);
         void onBeginFormValidation();
-        void onFormValidated();
+        void onSuccessValidation();
+        void onFailedValidation(@NonNull List<ValidationResult> errors);
     }
 }
