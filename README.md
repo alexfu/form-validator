@@ -37,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.alexfu:form-validator:1.0'
+  compile 'com.github.alexfu:form-validator:2.0'
 }
 ```
 
